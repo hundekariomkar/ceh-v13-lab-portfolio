@@ -1,7 +1,7 @@
-# CEH-v13-lab-Portfolio
+# CEH-v13-lab-Reports
 🔐 Structured CEHv13 lab portfolio demonstrating reconnaissance, vulnerability assessment, exploitation, web security testing, and defensive mitigation strategies.
 
-# CEH v13 Lab Portfolio 🔐
+# CEH v13 Lab Reports 🔐
 
 This repository documents hands-on cybersecurity labs completed during preparation for the Certified Ethical Hacker (CEH v13) certification.
 
