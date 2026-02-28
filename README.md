@@ -1,5 +1,5 @@
 # CEH-v13-lab-Reports
-🔐 Structured CEHv13 lab portfolio demonstrating reconnaissance, vulnerability assessment, exploitation, web security testing, and defensive mitigation strategies.
+🔐 Structured CEHv13 lab reports demonstrating reconnaissance, vulnerability assessment, exploitation, web security testing, and defensive mitigation strategies.
 
 # CEH v13 Lab Reports 🔐
 
