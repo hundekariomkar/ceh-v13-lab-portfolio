@@ -34,7 +34,7 @@ Scanning was performed in a controlled lab environment consisting of Kali Linux 
 
 Used to identify active systems within the network.
 
-nmap -sn (IP Address)
+** nmap -sn (IP Address) **
 
 This performed a ping sweep to detect live hosts without scanning ports.
 
@@ -44,21 +44,21 @@ This performed a ping sweep to detect live hosts without scanning ports.
 
 #### TCP SYN Scan (Stealth Scan)
 
-nmap -sS (IP Address)
+** nmap -sS (IP Address) **
 
 - Fast and less detectable  
 - Sends SYN packets without completing handshake  
 
 #### Full TCP Connect Scan
 
-nmap -sT (IP Address)
+** nmap -sT (IP Address) **
 
 - Completes full TCP handshake  
 - Easier to detect by IDS  
 
 #### Full Port Scan
 
-nmap -p- (IP Address)
+** nmap -p- (IP Address) **
 
 - Scans all 65535 ports  
 
@@ -66,7 +66,7 @@ nmap -p- (IP Address)
 
 ### 🔎 3. Service Version Detection
 
-nmap -sV (IP Address)
+** nmap -sV (IP Address) **
 
 Identified specific service versions running on open ports, helping determine potential vulnerabilities.
 
@@ -74,7 +74,7 @@ Identified specific service versions running on open ports, helping determine po
 
 ### 🖥 4. OS Detection
 
-nmap -O (IP Address)
+** nmap -O (IP Address) **
 
 Used TCP/IP stack fingerprinting to identify target operating system.
 
@@ -82,7 +82,7 @@ Used TCP/IP stack fingerprinting to identify target operating system.
 
 ### 🌊 5. UDP Scanning
 
-nmap -sU (IP Address)
+** nmap -sU (IP Address) **
 
 Detected UDP services such as DNS or SNMP which are commonly overlooked but exploitable.
 
@@ -98,7 +98,7 @@ Different scan types impact detection probability:
 
 Example Aggressive Scan:
 
-nmap -A (IP Address)
+** nmap -A (IP Address) **
 
 Includes:
 - OS detection  
