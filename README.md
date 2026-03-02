@@ -126,4 +126,6 @@ Each module aligns with one or more of these phases.
 
 Aspiring Cybersecurity Professional with hands-on experience in penetration testing, vulnerability assessment, and structured security analysis through CEH v13 practical labs.
 
+📧 Email: hundekari.omkar55@gmail.com
+
 - LinkedIn: https://www.linkedin.com/in/omkarhundekari
