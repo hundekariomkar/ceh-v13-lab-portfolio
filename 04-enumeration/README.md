@@ -121,4 +121,67 @@ Default community strings such as `Public` and `Private` pose serious security r
 - Change default community strings  
 - Restrict SNMP access using firewall rules  
 - Use SNMPv3 with authentication and encryption  
-- Monitor SNMP access logs  
+- Monitor SNMP access logs
+
+---
+
+### 🏢 LDAP Enumeration using Active Directory Explorer
+
+Lightweight Directory Access Protocol (LDAP) enumeration was performed to extract structured directory information from the Active Directory environment.
+
+Active Directory Explorer was used to connect to the domain controller and analyze directory objects.
+
+---
+
+### 🔍 Information Retrieved
+
+Using LDAP enumeration, the following data was gathered:
+
+- Domain name  
+- Organizational Units (OUs)  
+- User accounts  
+- Group memberships  
+- Service accounts  
+- Computer objects  
+- Domain structure hierarchy  
+
+LDAP provides deep visibility into domain-based environments.
+
+---
+
+### 🎯 Purpose of LDAP Enumeration
+
+LDAP enumeration helps attackers and security professionals:
+
+- Identify valid user accounts  
+- Map domain trust relationships  
+- Discover privilege levels  
+- Locate service accounts  
+- Understand domain hierarchy  
+
+This information is critical for privilege escalation and lateral movement scenarios.
+
+---
+
+### ⚠️ Risk Analysis
+
+Unrestricted LDAP access may lead to:
+
+- Exposure of sensitive user information  
+- Credential-based attacks  
+- Privilege escalation  
+- Domain compromise  
+
+Improperly secured directory services significantly increase attack impact.
+
+---
+
+### 🛡 Mitigation Recommendations
+
+- Restrict anonymous LDAP binds  
+- Implement strong access controls  
+- Enforce least privilege principles  
+- Monitor unusual LDAP queries  
+- Harden domain controller configurations  
+
+---
