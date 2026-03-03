@@ -111,7 +111,7 @@ Misconfigured SNMP services may allow attackers to:
 - Discover system details for targeted exploitation  
 - Gather reconnaissance data without authentication  
 
-Default community strings such as `public` and `private` pose serious security risks.
+Default community strings such as `Public` and `Private` pose serious security risks.
 
 ---
 
