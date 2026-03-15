@@ -2,31 +2,34 @@
 
 ## 📌 Lab Overview
 
-Enumeration involves actively extracting detailed information from target systems and services after identifying open ports during the scanning phase.
+Enumeration is the process of actively extracting detailed information from target systems after identifying open ports during the scanning phase.
 
-This module focused on extracting usernames, shares, directory services data, and exposed network file systems using structured enumeration techniques within an isolated lab environment.
+This module focused on gathering usernames, domain information, network services, and exposed file systems through structured service-level interaction in a controlled lab environment.
 
 ---
 
 ## 🎯 Objectives
 
 - Perform NetBIOS enumeration  
-- Enumerate services using Windows command-line utilities  
-- Extract information via SNMP  
-- Enumerate LDAP directory services  
+- Extract system information using SNMP  
+- Enumerate Active Directory via LDAP  
 - Identify exposed NFS shares  
+- Perform DNS service enumeration  
+- Extract SMTP user information  
 
 ---
 
 ## 🛠 Tools Used
 
 - Nmap  
-- NetBIOS utilities  
-- Windows Command Line tools  
+- nbtstat  
 - SnmpWalk  
 - Active Directory Explorer  
-- RPCScan  
+- rpcinfo  
+- showmount  
 - SuperEnum  
+- DNS utilities (nslookup, dig)  
+- SMTP utilities (Netcat / Telnet)  
 - Kali Linux  
 - Windows 7 / Windows Server  
 - Metasploitable 2  
@@ -35,153 +38,148 @@ This module focused on extracting usernames, shares, directory services data, an
 
 ## 🔍 Methodology
 
----
+### 🖥 NetBIOS Enumeration
 
-### 💻 NetBIOS Enumeration using Windows Command Line Utilities
+Used to retrieve NetBIOS name tables and shared resource information.
 
-Used built-in Windows tools to extract NetBIOS-related information.
+**nbtstat -A (IP Address)**
 
-#### 1. Retrieve Remote NetBIOS Name Table
+**nbtstat -c**
 
-** nbtstat -A (IP Address) **
-
-This command retrieved:
+Extracted:
 
 - NetBIOS computer name  
-- Workgroup/domain name  
-- Registered services  
-- MAC address  
-
-It provides insight into host identity and network role.
+- Workgroup/domain details  
+- Cached NetBIOS entries
 
 ---
 
-#### 2. Display NetBIOS Name Cache
+### 📡 SNMP Enumeration
 
-** nbtstat -c (IP Address) **
+Used SNMP to extract system and network configuration data.
 
-This displayed:
+**snmpwalk -v1 -c public (IP Address)**
 
-- Locally cached NetBIOS names  
-- Resolved remote host mappings  
-
-This helps identify previously contacted systems and potential internal network relationships.
-
----
-
-### 📡 SNMP Enumeration using SnmpWalk
-
-Simple Network Management Protocol (SNMP) was enumerated to extract system and network-level information from the target host.
-
-SNMP is commonly misconfigured with default community strings such as `public`, which allows attackers to gather sensitive information without authentication.
-
-#### Command Used:
-
-** snmpwalk -v1 -c public (IP Address) **
-
-Where:
-
-- `-v1` → Specifies SNMP version 1  
-- `-c public` → Community string (default value)  
-- `IP Address` → Target host IP  
-
----
-
-### 🔍 Information Extracted
-
-Using SNMP enumeration, the following data was retrieved:
+Enumerated:
 
 - System description  
-- Hostname  
 - Network interfaces  
-- Routing information  
 - Running services  
-- Installed software (in some cases)  
-
-SNMP can expose significant internal configuration details if not properly secured.
+- Routing tables  
 
 ---
 
-### ⚠️ Risk Analysis
+### 🏢 LDAP Enumeration
 
-Misconfigured SNMP services may allow attackers to:
+Used Active Directory Explorer to enumerate domain directory information.
 
-- Map internal network infrastructure  
-- Identify running services and versions  
-- Discover system details for targeted exploitation  
-- Gather reconnaissance data without authentication  
+Extracted:
 
-Default community strings such as `Public` and `Private` pose serious security risks.
-
----
-
-### 🛡 Mitigation Recommendations
-
-- Disable SNMP if not required  
-- Change default community strings  
-- Restrict SNMP access using firewall rules  
-- Use SNMPv3 with authentication and encryption  
-- Monitor SNMP access logs
-
----
-
-### 🏢 LDAP Enumeration using Active Directory Explorer
-
-Lightweight Directory Access Protocol (LDAP) enumeration was performed to extract structured directory information from the Active Directory environment.
-
-Active Directory Explorer was used to connect to the domain controller and analyze directory objects.
-
----
-
-### 🔍 Information Retrieved
-
-Using LDAP enumeration, the following data was gathered:
-
-- Domain name  
-- Organizational Units (OUs)  
 - User accounts  
 - Group memberships  
-- Service accounts  
-- Computer objects  
-- Domain structure hierarchy  
+- Organizational units  
+- Domain hierarchy  
 
-LDAP provides deep visibility into domain-based environments.
-
----
-
-### 🎯 Purpose of LDAP Enumeration
-
-LDAP enumeration helps attackers and security professionals:
-
-- Identify valid user accounts  
-- Map domain trust relationships  
-- Discover privilege levels  
-- Locate service accounts  
-- Understand domain hierarchy  
-
-This information is critical for privilege escalation and lateral movement scenarios.
+LDAP enumeration helps understand privilege relationships within domain environments.
 
 ---
 
-### ⚠️ Risk Analysis
+### 📂 NFS Enumeration
 
-Unrestricted LDAP access may lead to:
+Identified exposed file shares in Linux environments.
 
-- Exposure of sensitive user information  
-- Credential-based attacks  
+**rpcinfo -p (IP Address)**
+
+**showmount -e (IP Address)**
+
+SuperEnum was used to automate multi-service enumeration.
+
+Discovered:
+
+- Exported directories  
+- RPC services  
+- Access permissions  
+
+---
+
+### 🌐 DNS Enumeration
+
+Used DNS queries to gather domain-related information.
+
+**nslookup example.com**
+
+**dig example.com**
+
+Enumerated:
+
+- Name servers  
+- Mail exchange records  
+- Domain IP mappings  
+- Subdomain hints  
+
+---
+
+### 📧 SMTP Enumeration
+
+Used SMTP interaction to identify valid users.
+
+Example:
+
+**nc (IP Address)**
+
+or
+
+**telnet (IP Address)**
+
+Possible enumeration commands:
+
+- VRFY  
+- EXPN  
+
+Extracted:
+
+- Valid usernames  
+- Mail server banner information  
+
+---
+
+## 📊 Findings
+
+- Identified NetBIOS host details  
+- Retrieved system data via SNMP  
+- Enumerated Active Directory structure  
+- Discovered exposed NFS shares  
+- Gathered DNS configuration data  
+- Identified SMTP user validation responses  
+
+---
+
+## ⚠️ Risk Analysis
+
+Enumeration exposed critical internal details that could lead to:
+
+- Credential attacks  
 - Privilege escalation  
+- Sensitive data exposure  
 - Domain compromise  
+- Targeted phishing campaigns  
 
-Improperly secured directory services significantly increase attack impact.
+Unrestricted service visibility significantly increases attack surface.
+
+---
+
+## 🛡 Mitigation Recommendations
+
+- Disable unnecessary NetBIOS services  
+- Harden SNMP configuration (use SNMPv3)  
+- Restrict LDAP access  
+- Secure NFS exports  
+- Implement DNS security controls  
+- Disable SMTP user enumeration  
+- Monitor abnormal enumeration activity  
 
 ---
 
-### 🛡 Mitigation Recommendations
+## 📝 Lab Outcome
 
-- Restrict anonymous LDAP binds  
-- Implement strong access controls  
-- Enforce least privilege principles  
-- Monitor unusual LDAP queries  
-- Harden domain controller configurations  
-
----
+Developed structured service-level intelligence gathering skills across multiple protocols including NetBIOS, SNMP, LDAP, NFS, DNS, and SMTP, understanding how enumeration bridges scanning and exploitation phases in penetration testing.
